@@ -75,6 +75,18 @@ public class Order {
     return false;
     }
 
+    //#5
+public boolean giveDiscount(Integer id, String discount){
+    for (List<Product> products : productMap.values()){
+        for (Product product : products){
+            if (product.getID().equals(id) && discount.equals("rabat")){
+                product.setPrice(product.getPrice()*0.9);
+                return true;
+            }
+        }
+    }return false;
+}
+
 
 
 

@@ -42,6 +42,13 @@ public class OrderService {
         Order order = getOrderById(orderID);
         return order.removeProductByID(productID);
     }
+    //#5
+    public boolean giveDiscount(Integer orderID, Integer productID, String discount){
+        Order order = getOrderById(orderID);
+        return order.giveDiscount(productID, discount);
+
+
+    }
 
 
 
@@ -56,6 +63,7 @@ public class OrderService {
         throw new IllegalArgumentException("Unrecognized id " + id);
     }
 
+    //#3
     private void printProducts(List<Product> products){
         for (int i = 0; i<products.size(); i++){
             System.out.println((i+1) + ".- " + products.get(i));

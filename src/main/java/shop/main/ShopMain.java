@@ -20,6 +20,7 @@ public class ShopMain {
         System.out.println("2 - dodaj produkt do zamówienia");
         System.out.println("3 - wyświetl zamówienie");
         System.out.println("4 - usuń produkt z zamówienia");
+        System.out.println("5 - dodaj kod rabatowy");
 
 
 
@@ -36,6 +37,7 @@ public class ShopMain {
                 break;
             case 4: removeProductFromOrder();   //#4
                 break;
+            case 5: giveDiscount();             //#5
 
         }
 
@@ -97,6 +99,27 @@ public class ShopMain {
             System.out.println("Nie udało się usunąć produktu o id " + productID + " z zamówienia o id " + orderID);
         }
     }
+
+    //#5
+    public static void giveDiscount(){
+        System.out.println("Podaj ID zamówienia");
+        int orderID = scanner.nextInt();
+
+        System.out.println("Podaj ID produktu");
+        int productID = scanner.nextInt();
+
+        System.out.println("Podaj kod rabatowy");
+        String discount = scanner.next();
+
+        boolean result = orderService.giveDiscount(orderID, productID, discount);
+
+        if (result){
+            System.out.println("Rabat w wysokości 10% wartości produktu o ID: " + productID + " został udzielony");
+        }else {
+            System.out.println("Podano błędny kod rabatowy");
+        }
+    }
+
 
 
 }

@@ -21,7 +21,7 @@ public class Product {
         this.model = model;
         this.price = price;
         this.purchaseDate = LocalDate.now();
-        this.warrantyDate = warrantyDate;
+        this.warrantyDate = calculateWarrantyDate();
     }
 
 
