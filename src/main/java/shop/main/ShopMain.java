@@ -17,6 +17,9 @@ public class ShopMain {
         System.out.println("Wybierz funkcję: ");
         System.out.println("0 - zakończ");
         System.out.println("1 - utwórz zamówienie");
+        System.out.println("2 - dodaj produkt do zamówienia");
+        System.out.println("3 - wyświetl zamówienie");
+        System.out.println("4 - usuń produkt z zamówienia");
 
 
 
@@ -25,7 +28,13 @@ public class ShopMain {
         switch (choose){
 
             case 0: System.exit(0);
-            case 1: createOrder();
+            case 1: createOrder();              //#1
+                break;
+            case 2: addProductToOrderr();       //#2
+                break;
+            case 3: printOrder();               //#3
+                break;
+            case 4: removeProductFromOrder();   //#4
                 break;
 
         }
@@ -34,8 +43,60 @@ public class ShopMain {
     }while (true);
 
     }
+
+    //#1
     private static void createOrder(){
         int orderID = orderService.createOrderId();
         System.out.println("Utworzono zamówienie o id: " + orderID);
     }
+
+    //#2
+    private static void addProductToOrderr(){
+        System.out.println("Podaj ID zamówienia:");
+        int orderID = scanner.nextInt();
+
+        System.out.println("Podaj typ produktu:");
+        String type = scanner.next();
+
+        System.out.println("Podaj markę produktu:");
+        String brand = scanner.next();
+
+        System.out.println("Podaj model produktu:");
+        String model = scanner.next();
+
+        System.out.println("Podaj cenę produktu");
+        double price = scanner.nextDouble();
+
+        int productID = orderService.addProductToOrder(orderID, type, brand,model,price);
+        System.out.println("Pomyślnie dodano produkt " + productID + " do zamówienia: " + orderID);
+    }
+
+    //#3
+    public static void printOrder(){
+        System.out.println("Podaj ID zamówienia");
+        int orderID = scanner.nextInt();
+
+        System.out.println(" Zamówienie składa się z następujących produktów:");
+        orderService.printOrder(orderID);
+    }
+
+    //#4
+    public static void removeProductFromOrder(){
+
+        System.out.println("Podaj ID zamówienia");
+        int orderID = scanner.nextInt();
+
+        System.out.println("Podaj ID produktu");
+        int productID = scanner.nextInt();
+
+        boolean result = orderService.removeProductFromOrder(orderID, productID);
+
+        if (result) {
+            System.out.println("Pomyślnie usunięto produkt o id " + productID + " z zamówienia o id " + orderID);
+        } else {
+            System.out.println("Nie udało się usunąć produktu o id " + productID + " z zamówienia o id " + orderID);
+        }
+    }
+
+
 }

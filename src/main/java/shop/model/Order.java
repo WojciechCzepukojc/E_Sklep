@@ -24,11 +24,14 @@ public class Order {
         return id;
     }
 
-    public LocalDate getCerateDate() {
+    public LocalDate getCreateDate() {
         return cerateDate;
     }
 
-public void addProduct(Product product){
+
+
+//#2
+    public void addProduct(Product product){
         if (productMap.containsKey(product.getProductType())){
             List<Product> products = productMap.get(product.getProductType());
             products.add(product);
@@ -39,15 +42,40 @@ public void addProduct(Product product){
         }
 }
 
-public List<Product> getProductsByType(ProductType productType){
-        return productMap.get(productType);
-}
 
-public List<Product> getProducts(){
+
+//#3
+    public List<Product> getProducts(){
         List<Product> result = new ArrayList<>();
         for (List<Product> products : productMap.values()){
             result.addAll(products);
         }
         return result;
 }
+
+
+
+//#4
+    public boolean removeProductByID (Integer id){
+
+        Product productToRemove = null;
+
+    for (List<Product> products: productMap.values()){
+        for (Product product: products){
+            if (product.getID().equals(id)){
+                productToRemove = product;
+                break;
+            }
+        }
+        if (productToRemove != null){
+        products.remove(productToRemove);
+        return true;
+        }
+    }
+    return false;
+    }
+
+
+
+
 }
