@@ -9,9 +9,12 @@ public class ShopMain {
     private static Scanner scanner = new Scanner(System.in);
     private static OrderService orderService = new OrderService();
 
+    public static String discount = null;
+
     public static void main(String[] args) {
 
     int choose = 0;
+
 
     do {
         System.out.println("Wybierz funkcję: ");
@@ -101,22 +104,29 @@ public class ShopMain {
     }
 
     //#5
-    public static void giveDiscount(){
-        System.out.println("Podaj ID zamówienia");
-        int orderID = scanner.nextInt();
+    public static void giveDiscount() {
 
-        System.out.println("Podaj ID produktu");
-        int productID = scanner.nextInt();
 
-        System.out.println("Podaj kod rabatowy");
-        String discount = scanner.next();
+        if (discount == null) {
+            System.out.println("Podaj ID zamówienia");
+            int orderID = scanner.nextInt();
 
-        boolean result = orderService.giveDiscount(orderID, productID, discount);
+            System.out.println("Podaj ID produktu");
+            int productID = scanner.nextInt();
 
-        if (result){
-            System.out.println("Rabat w wysokości 10% wartości produktu o ID: " + productID + " został udzielony");
-        }else {
-            System.out.println("Podano błędny kod rabatowy");
+            System.out.println("Podaj kod rabatowy");
+            discount = scanner.next();
+
+
+            boolean result = orderService.giveDiscount(orderID, productID, discount);
+
+            if (result) {
+                System.out.println("Rabat w wysokości 10% wartości produktu o ID: " + productID + " został udzielony");
+            } else {
+                System.out.println("Podano błędny kod rabatowy");
+            }
+        } else {
+            System.out.println("Rabat został już udzielony lub podano błędny kod rabatowy");
         }
     }
 
