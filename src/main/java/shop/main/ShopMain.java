@@ -106,8 +106,7 @@ public class ShopMain {
     //#5
     public static void giveDiscount() {
 
-
-        if (discount == null) {
+        if (discount != "rabat") {
             System.out.println("Podaj ID zamówienia");
             int orderID = scanner.nextInt();
 
@@ -118,15 +117,17 @@ public class ShopMain {
             discount = scanner.next();
 
 
+
             boolean result = orderService.giveDiscount(orderID, productID, discount);
 
             if (result) {
                 System.out.println("Rabat w wysokości 10% wartości produktu o ID: " + productID + " został udzielony");
+                discount = "rabat";
             } else {
                 System.out.println("Podano błędny kod rabatowy");
             }
         } else {
-            System.out.println("Rabat został już udzielony lub podano błędny kod rabatowy");
+            System.out.println("Rabat został już udzielony");
         }
     }
 
