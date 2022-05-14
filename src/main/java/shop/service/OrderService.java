@@ -47,7 +47,11 @@ public class OrderService {
         Order order = getOrderById(orderID);
         return order.giveDiscount(productID, discount);
 
-
+    }
+    //#6
+    public Double getOrderValue(Integer orderID){
+        Order order = getOrderById(orderID);
+        return  order.collectOrderValue();
     }
 
 
@@ -69,6 +73,8 @@ public class OrderService {
             System.out.println((i+1) + ".- " + products.get(i));
         }
     }
+
+
 
 
 

@@ -24,6 +24,7 @@ public class ShopMain {
         System.out.println("3 - wyświetl zamówienie");
         System.out.println("4 - usuń produkt z zamówienia");
         System.out.println("5 - dodaj kod rabatowy");
+        System.out.println("6 - wyświetl wartość zamówienia");
 
 
 
@@ -41,6 +42,9 @@ public class ShopMain {
             case 4: removeProductFromOrder();   //#4
                 break;
             case 5: giveDiscount();             //#5
+                break;
+            case 6: sumOrderValue();            //#6
+                break;
 
         }
 
@@ -116,8 +120,6 @@ public class ShopMain {
             System.out.println("Podaj kod rabatowy");
             discount = scanner.next();
 
-
-
             boolean result = orderService.giveDiscount(orderID, productID, discount);
 
             if (result) {
@@ -129,6 +131,16 @@ public class ShopMain {
         } else {
             System.out.println("Rabat został już udzielony");
         }
+    }
+
+    //#6
+    public static void sumOrderValue(){
+        System.out.println("Podaj ID zamówienia");
+        Integer orderID = scanner.nextInt();
+
+        Double sum = orderService.getOrderValue(orderID);
+
+        System.out.println("Wartość twojego zamówienia wynosi: " + sum);
     }
 
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class Order {
 
@@ -29,65 +30,76 @@ public class Order {
     }
 
 
-
-//#2
-    public void addProduct(Product product){
-        if (productMap.containsKey(product.getProductType())){
+    //#2
+    public void addProduct(Product product) {
+        if (productMap.containsKey(product.getProductType())) {
             List<Product> products = productMap.get(product.getProductType());
             products.add(product);
-        }else {
-        List<Product> products = new ArrayList<>();
-        products.add(product);
-        productMap.put(product.getProductType(), products);
+        } else {
+            List<Product> products = new ArrayList<>();
+            products.add(product);
+            productMap.put(product.getProductType(), products);
         }
-}
+    }
 
 
-
-//#3
-    public List<Product> getProducts(){
+    //#3
+    public List<Product> getProducts() {
         List<Product> result = new ArrayList<>();
-        for (List<Product> products : productMap.values()){
+        for (List<Product> products : productMap.values()) {
             result.addAll(products);
         }
         return result;
-}
+    }
 
 
-
-//#4
-    public boolean removeProductByID (Integer id){
+    //#4
+    public boolean removeProductByID(Integer id) {
 
         Product productToRemove = null;
 
-    for (List<Product> products: productMap.values()){
-        for (Product product: products){
-            if (product.getID().equals(id)){
-                productToRemove = product;
-                break;
+        for (List<Product> products : productMap.values()) {
+            for (Product product : products) {
+                if (product.getID().equals(id)) {
+                    productToRemove = product;
+                    break;
+                }
             }
-        }
-        if (productToRemove != null){
-        products.remove(productToRemove);
-        return true;
-        }
-    }
-    return false;
-    }
-
-    //#5
-public boolean giveDiscount(Integer id, String discount){
-    for (List<Product> products : productMap.values()){
-        for (Product product : products){
-            if (product.getID().equals(id) && discount.equals("rabat")){
-                product.setPrice(product.getPrice()*0.9);
+            if (productToRemove != null) {
+                products.remove(productToRemove);
                 return true;
             }
         }
-    }return false;
+        return false;
+    }
+
+    //#5
+    public boolean giveDiscount(Integer id, String discount) {
+        for (List<Product> products : productMap.values()) {
+            for (Product product : products) {
+                if (product.getID().equals(id) && discount.equals("rabat")) {
+                    product.setPrice(product.getPrice() * 0.9);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+//#6
+    public double collectOrderValue() {
+        double sum = 0;
+        for (List<Product> products : productMap.values()) {
+            for (Product product : products) {
+                sum += product.getPrice();
+            }
+        }return sum;
+    }
 }
 
 
 
 
-}
+
+
+
