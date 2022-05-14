@@ -86,14 +86,15 @@ public class Order {
         return false;
     }
 
-//#6
+    //#6
     public double collectOrderValue() {
         double sum = 0;
         for (List<Product> products : productMap.values()) {
             for (Product product : products) {
                 sum += product.getPrice();
             }
-        }return sum;
+        }
+        return sum;
     }
 }
 

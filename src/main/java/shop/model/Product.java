@@ -78,8 +78,8 @@ public class Product {
                 '}';
     }
 
-    private LocalDate calculateWarrantyDate(){
-        switch (productType){
+    private LocalDate calculateWarrantyDate() {
+        switch (productType) {
             case PHONE:
                 return purchaseDate.plusYears(1);
             case SMARTPHONE:
